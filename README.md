@@ -14,7 +14,7 @@
 <h2>🆕 Añadidos:</h2>
 
 * Clase Abstracta con elementos comunes
-* Consulta join entre las dos tablas con criteria
+* Consulta join entre las dos tablas con el método "findByIdClient" en la clase contractDaoImpl que dará como resultado una lista de objetos Contract resultado de pasar el ID de tipo Integer del cliente, en la versión T2 se pasaba directamente el objeto cliente.
 * Ahora verificará que el DNI no existe antes de solicitar datos del contrato.
 
 <h3><i>Ejercicio propuesto:</i></h3>
