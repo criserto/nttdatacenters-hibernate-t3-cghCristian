@@ -120,7 +120,7 @@ public class Presentation {
 
 		existDNI = serviceClient.save(client);
 
-		if (!existDNI) {
+		if (existDNI) {
 
 			String añoVigente = null;
 			String mesVigente = null;
