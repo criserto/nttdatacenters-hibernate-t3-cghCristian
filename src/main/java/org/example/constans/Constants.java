@@ -23,8 +23,8 @@ public class Constants {
 										
 										"\n0. Salir";
 
-	public static final String SC_OPCION_INCORRECTA = "Atención, opción incorrecta";
-	public static final String SC_FAILED = "Atención, has introducido un valor incorrecto o duplicado";
+	public static final String SC_OPCION_INCORRECTA = "\nAtención, opción incorrecta\n";
+	public static final String SC_FAILED = "\nAtención, has introducido un valor incorrecto o duplicado\n";
 	
 	// STRINGS MENSAJES PARA CLIENTES
 	public static final String SC_FAILED_FIND_CLIENT = "\nAtención, no se ha localizado cliente con los datos facilitados\n";
@@ -34,6 +34,7 @@ public class Constants {
 	public static final String SC_APELLIDO1_CLIENTE = "Introduce el primer apellido del cliente:";
 	public static final String SC_APELLIDO2_CLIENTE = "Introduce el segundo apellido del cliente:";
 	public static final String SC_DNI_CLIENTE = "Introduce el DNI del cliente:";
+	public static final String SC_DNI_REPETIDO = "\nIntroduciste un DNI repetido\n";
 	public static final String SC_DESPEDIDA = "Adios";
 	
 	
@@ -46,5 +47,5 @@ public class Constants {
 	public static final String CC_DIA_EXPIRACION = "Introduce el día de expriación del contrato";
 	public static final String CC_PRECIO_CONTRATO = "Introduce el precio del contrato";
 	public static final String CC_ID_CONTRATO = "Introduce el ID del contrato";
-	public static final String CC_NOT_FOUND_CONTRACT = "No se ha encontrado ningún contrato registrado";
+	public static final String CC_NOT_FOUND_CONTRACT = "\nNo se ha encontrado ningún contrato registrado\n";
 }

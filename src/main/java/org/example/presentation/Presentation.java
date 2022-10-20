@@ -103,52 +103,12 @@ public class Presentation {
 		String nombreCliente = Utils.entradaTexto(constants.SC_NOMBRE_CLIENTE);
 		String apellido1 = Utils.entradaTexto(constants.SC_APELLIDO1_CLIENTE);
 		String apellido2 = Utils.entradaTexto(constants.SC_APELLIDO2_CLIENTE);
+		Boolean existDNI;
 		String dni = null;
 
 		do {
 			dni = Utils.entradaTexto(constants.SC_DNI_CLIENTE);
 		} while (dni.length() != 9);
-
-		String añoVigente = null;
-		String mesVigente = null;
-		String diaVigente = null;
-
-		String añoExpiracion = null;
-		String mesExpiracion = null;
-		String diaExpiracion = null;
-
-		// REPETIRA EL BUCLE SI NO INTRODUCES VALORES APROPIADOS AL DATO QUE SE PIDE
-		do {
-			añoVigente = Utils.entradaTexto(constants.CC_AÑO_VIGENTE);
-		} while (Integer.parseInt(añoVigente) < 1 && Integer.parseInt(añoVigente) > 1950);
-
-		do {
-			mesVigente = Utils.entradaTexto(constants.CC_MES_VIGENTE);
-		} while (Integer.parseInt(mesVigente) < 1 || Integer.parseInt(mesVigente) > 12);
-
-		do {
-			diaVigente = Utils.entradaTexto(constants.CC_DIA_VIGENTE);
-		} while (Integer.parseInt(diaVigente) < 1 || Integer.parseInt(diaVigente) > 31);
-
-		String fechaVigente = añoVigente.concat("-").concat(mesVigente).concat("-").concat(diaVigente);
-		LocalDate fechaVigenteL = LocalDate.parse(fechaVigente);
-
-		do {
-			añoExpiracion = Utils.entradaTexto(constants.CC_AÑO_EXPIRACION);
-		} while (Integer.parseInt(añoExpiracion) < 1 && Integer.parseInt(añoExpiracion) > 1950);
-
-		do {
-			mesExpiracion = Utils.entradaTexto(constants.CC_MES_EXPIRACION);
-		} while (Integer.parseInt(mesExpiracion) < 1 || Integer.parseInt(mesExpiracion) > 12);
-
-		do {
-			diaExpiracion = Utils.entradaTexto(constants.CC_DIA_EXPIRACION);
-		} while (Integer.parseInt(diaExpiracion) < 1 || Integer.parseInt(diaExpiracion) > 31);
-
-		String fechaExpiracion = añoExpiracion.concat("-").concat(mesExpiracion).concat("-").concat(diaExpiracion);
-		LocalDate fechaExpiracionL = LocalDate.parse(fechaExpiracion);
-
-		Double precio = Utils.entradaDouble(constants.CC_PRECIO_CONTRATO);
 
 		client = new Client();
 
@@ -158,16 +118,62 @@ public class Presentation {
 		client.setDni(dni);
 		client.setContract(serviceContract.findAll());
 
-		serviceClient.save(client);
+		existDNI = serviceClient.save(client);
 
-		contract = new Contract();
-		
-		contract.setFechaVigencia(fechaExpiracionL);
-		contract.setFechaCaducidad(fechaExpiracionL);
-		contract.setPrecio(precio);
-		contract.setClient(client);
+		if (!existDNI) {
 
-		serviceContract.save(contract);
+			String añoVigente = null;
+			String mesVigente = null;
+			String diaVigente = null;
+
+			String añoExpiracion = null;
+			String mesExpiracion = null;
+			String diaExpiracion = null;
+
+			// REPETIRA EL BUCLE SI NO INTRODUCES VALORES APROPIADOS AL DATO QUE SE PIDE
+			do {
+				añoVigente = Utils.entradaTexto(constants.CC_AÑO_VIGENTE);
+			} while (Integer.parseInt(añoVigente) < 1 && Integer.parseInt(añoVigente) > 1950);
+
+			do {
+				mesVigente = Utils.entradaTexto(constants.CC_MES_VIGENTE);
+			} while (Integer.parseInt(mesVigente) < 1 || Integer.parseInt(mesVigente) > 12);
+
+			do {
+				diaVigente = Utils.entradaTexto(constants.CC_DIA_VIGENTE);
+			} while (Integer.parseInt(diaVigente) < 1 || Integer.parseInt(diaVigente) > 31);
+
+			String fechaVigente = añoVigente.concat("-").concat(mesVigente).concat("-").concat(diaVigente);
+			LocalDate fechaVigenteL = LocalDate.parse(fechaVigente);
+
+			do {
+				añoExpiracion = Utils.entradaTexto(constants.CC_AÑO_EXPIRACION);
+			} while (Integer.parseInt(añoExpiracion) < 1 && Integer.parseInt(añoExpiracion) > 1950);
+
+			do {
+				mesExpiracion = Utils.entradaTexto(constants.CC_MES_EXPIRACION);
+			} while (Integer.parseInt(mesExpiracion) < 1 || Integer.parseInt(mesExpiracion) > 12);
+
+			do {
+				diaExpiracion = Utils.entradaTexto(constants.CC_DIA_EXPIRACION);
+			} while (Integer.parseInt(diaExpiracion) < 1 || Integer.parseInt(diaExpiracion) > 31);
+
+			String fechaExpiracion = añoExpiracion.concat("-").concat(mesExpiracion).concat("-").concat(diaExpiracion);
+			LocalDate fechaExpiracionL = LocalDate.parse(fechaExpiracion);
+
+			Double precio = Utils.entradaDouble(constants.CC_PRECIO_CONTRATO);
+
+			contract = new Contract();
+
+			contract.setFechaVigencia(fechaExpiracionL);
+			contract.setFechaCaducidad(fechaExpiracionL);
+			contract.setPrecio(precio);
+			contract.setClient(client);
+
+			serviceContract.save(contract);
+		} else {
+			Utils.mostrarMensajeErr(constants.SC_DNI_REPETIDO);
+		}
 
 	}
 
@@ -361,9 +367,9 @@ public class Presentation {
 	private static void getContractByIdClient() {
 
 		client = serviceClient.findById(Utils.entradaInt(constants.SC_ID_CLIENTE));
-		List <Contract> myContract = null;
-		if (client!= null) {
-			
+		List<Contract> myContract = null;
+		if (client != null) {
+
 			myContract = serviceContract.findByIdClient(client.getId());
 
 		}

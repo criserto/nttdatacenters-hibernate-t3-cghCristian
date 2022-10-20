@@ -64,16 +64,19 @@ public class clientDaoImpl implements clientDao {
 	 * Si se cumple la condición, el cliente se guarda, si no... No hace nada.
 	 */
 	@Override
-	public void save(Client t) {
+	public Boolean save(Client t) {
 
-		if (!existDNI(t.getDni())) {
+		Boolean existDNI = existDNI(t.getDni());
+		
+		if (!existDNI) {
 			s = buildSession().openSession();
 			s.beginTransaction();
 			s.save(t);
 			s.getTransaction().commit();
 			s.close();
-
 		}
+		
+		return existDNI;
 
 	}
 

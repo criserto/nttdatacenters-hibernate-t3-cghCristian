@@ -6,7 +6,7 @@ import org.example.persistence.Client;
 
 public interface clientDao {
 
-	void save(Client t);
+	public Boolean save(Client t);
 
 	public List<Client> findAll();
 
