@@ -6,24 +6,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.example.service.impl.AbstractEntity;
+
 @Entity
 @Table(name = "CLIENT", schema = "client")
-public class Client {
-//	identificador
-//	numérico, nombre, primer apellido, segundo apellido, y número de documento de identidad (único, no nulo y
-//	hasta 9 caracteres
-
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-
+public class Client extends AbstractEntity {
 	@Column(name = "NAME")
 	private String nombre;
 
@@ -41,14 +31,6 @@ public class Client {
 
 	public Client() {
 		super();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -93,7 +75,7 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
+		return "Client [id=" + getId() + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
 				+ ", dni=" + dni;
 	}
 

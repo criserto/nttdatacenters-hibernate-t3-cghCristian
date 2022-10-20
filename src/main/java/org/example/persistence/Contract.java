@@ -12,18 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.example.service.impl.AbstractEntity;
+
 
 @Entity
 @Table(name = "CONTRACT", schema = "client")
-public class Contract {
-//	identificador
-//	numérico, nombre, primer apellido, segundo apellido, y número de documento de identidad (único, no nulo y
-//	hasta 9 caracteres
-
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+public class Contract extends AbstractEntity {
 
 	@Column(name = "FECHA_VIGENCIA")
 	private LocalDate fechaVigencia;
@@ -41,15 +35,6 @@ public class Contract {
 
 	public Contract() {
 		super();
-	}
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public LocalDate getFechaVigencia() {
@@ -87,7 +72,7 @@ public class Contract {
 
 	@Override
 	public String toString() {
-		return "Contract [id=" + id + ", fechaVigencia=" + fechaVigencia + ", fechaCaducidad=" + fechaCaducidad
+		return "Contract [id=" + getId() + ", fechaVigencia=" + fechaVigencia + ", fechaCaducidad=" + fechaCaducidad
 				+ ", precio=" + precio + ", client=" + client + "]";
 	}
 

@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -85,22 +86,28 @@ public class contractDaoImpl implements contractDao {
 		}
 	}
 
-	//REVISAR 
+	/**
+	 * CONSULTA JOIN
+	 */
 	@Override
-	public List<Contract> findByIdClient(Client client) {
+	public List<Contract> findByIdClient(Integer idClient) {
 		
 		
 		s = buildSession().openSession();
+		
 		CriteriaBuilder builder = s.getCriteriaBuilder();
 		CriteriaQuery<Contract> criteriaQuery = builder.createQuery(Contract.class);
 		Root<Contract> root = criteriaQuery.from(Contract.class);
+		Join<Contract, Client> cJoinC = root.join("client");
 
 		try {
-			criteriaQuery.select(root);
-			criteriaQuery.where(builder.equal(root.get("client"), client));
-
+			
+			Predicate pr1 = builder.equal(cJoinC.get("id"), idClient);
+			
+			criteriaQuery.select(root).where(builder.and(pr1));
+			
 			List<Contract> contract = s.createQuery(criteriaQuery).getResultList();
-
+			
 			s.close();
 			return contract;
 			
@@ -109,6 +116,9 @@ public class contractDaoImpl implements contractDao {
 		}
 	}
 
+	/**
+	 * ASOCIAR CONTRATO CREADO CON CLIENTE
+	 */
 	@Override
 	public void asociarClienteContrato(Integer id, Client client) {
 		s = buildSession().openSession();

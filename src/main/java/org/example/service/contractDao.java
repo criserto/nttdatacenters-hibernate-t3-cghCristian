@@ -13,7 +13,7 @@ public interface contractDao {
 
 	public Contract findByIdContract(Integer id);
 	
-	public List<Contract> findByIdClient(Client client);
+	public List<Contract> findByIdClient(Integer idClient);
 	
 	public void asociarClienteContrato(Integer id, Client client);
 

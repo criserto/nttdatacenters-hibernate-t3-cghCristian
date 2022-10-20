@@ -364,7 +364,7 @@ public class Presentation {
 		List <Contract> myContract = null;
 		if (client!= null) {
 			
-			myContract = serviceContract.findByIdClient(client);
+			myContract = serviceContract.findByIdClient(client.getId());
 
 		}
 
