@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.example.service.impl.AbstractEntity;
-
 @Entity
 @Table(name = "CLIENT", schema = "client")
 public class Client extends AbstractEntity {

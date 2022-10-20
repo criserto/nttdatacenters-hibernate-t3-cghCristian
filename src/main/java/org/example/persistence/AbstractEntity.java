@@ -1,4 +1,4 @@
-package org.example.service.impl;
+package org.example.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

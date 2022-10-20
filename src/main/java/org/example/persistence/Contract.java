@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.example.service.impl.AbstractEntity;
-
 
 @Entity
 @Table(name = "CONTRACT", schema = "client")
